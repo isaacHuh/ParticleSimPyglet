@@ -22,7 +22,7 @@ class GameWindow(pyglet.window.Window):
 
 		self.text = pyglet.text.Label('Particle Simulation',
                           font_name='Arial',
-                          font_size=12,
+                          font_size=10,
                           x=10, y=self.size[1]-10,
                           anchor_y="top",
                           multiline=True,
@@ -96,7 +96,7 @@ class GameWindow(pyglet.window.Window):
 
 		particles = [0,0,0,0]
 		for i in self.particles:
-			'''
+			
 			if(i.type == "sand"):
 				particles[0] += 1
 			if(i.type == "water"):
@@ -105,7 +105,7 @@ class GameWindow(pyglet.window.Window):
 				particles[2] += 1
 			if(i.type == "smoke"):
 				particles[3] += 1
-			'''
+			
 			if(i.moving):
 				i.move(self.particles, self.size[0], self.size[1])
 
@@ -114,35 +114,14 @@ class GameWindow(pyglet.window.Window):
 							"Land Particles: {}\n".format(particles[0]) + \
 							"Water Particles: {}\n".format(particles[1]) + \
 							"Lava Particles {}\n".format(particles[2]) + \
-							"Smoke Particles {}\n".format(particles[3])
+							"Smoke Particles {}\n".format(particles[3]) + \
+							"\n" + \
+							"Controls: \n" + \
+							"- ARROW KEYS to move around\n" + \
+							"- SPACE to spawn particles\n" + \
+							"- 1,2,3 to switch particle spawn type\n" + \
+							"- R to reset \n"
 
-	'''
-	def on_mouse_press(self, x, y, button, modifiers):
-		if(button == pyglet.window.mouse.LEFT):
-			self.mouse_pos[0] = x
-			self.mouse_pos[1] = y
-			#self.mouse_hold = True
-
-			x_pos = int(self.mouse_pos[0]/self.particle_size) * self.particle_size
-			y_pos = int(self.mouse_pos[1]/self.particle_size) * self.particle_size
-
-			if(particle.particle_at(x_pos, y_pos, self.particles) == None):
-				self.particles.append(particle.Particle(self.type, self.particle_size, x_pos, y_pos))
-
-
-	def on_mouse_release(self, x, y, button, modifiers):
-		if(button == pyglet.window.mouse.LEFT):
-			self.mouse_hold = False
-
-	def on_mouse_drag(self, x, y, dx, dy, buttons, modifiers):
-		self.mouse_pos[0] = x
-		self.mouse_pos[1] = y
-		x_pos = int(self.mouse_pos[0]/self.particle_size) * self.particle_size
-		y_pos = int(self.mouse_pos[1]/self.particle_size) * self.particle_size
-
-		if(particle.particle_at(x_pos, y_pos, self.particles) == None):
-			self.particles.append(particle.Particle(self.type, self.particle_size, x_pos, y_pos))
-	'''
 	def on_key_press(self, symbol, modifiers):
 		if(symbol == key.UP):
 			self.move_up = True
